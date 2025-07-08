@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap");
+:root {
+  --bg-webColor: #dddddd99;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  direction: rtl;
+}
+body {
+  font-family: "Cairo", sans-serif;
+  background-color: var(--bg-webColor);
+  overflow: hidden;
+}
+
+.searchBox {
+  width: 30%;
+  min-width: 200px;
+  span {
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+td,
+th {
+  border: 1px solid skyblue;
+  width: fit-content !important;
+  min-width: 160px;
+  text-align: center;
+  vertical-align: middle;
+}
+td {
+  font-weight: 400;
+  font-size: larger;
+  img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+  }
+}
+
+.prodInfoBox {
+  width: 30%;
+  min-width: 350px;
+  position: relative;
+}
+.addToInvModal,
+.editToInvModal,
+.delModal {
+  background-color: #00000099;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+.closeX {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  cursor: pointer;
+}

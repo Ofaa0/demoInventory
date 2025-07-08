@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INVENTORY</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./inventory.css" />
+  </head>
+  <body>
+    <header>
+      <div class="container py-3">
+        <h1 class="text-center pb-3">مرحباً بك في المخزن</h1>
+        <div
+          class="btnsBar d-flex justify-content-between align-items-center flex-column flex-md-row gap-3 gap-md-0"
+        >
+          <button onclick="openAddToInvModal()" class="btn btn-success">
+            اضافة منتج الى المخزن
+          </button>
+          <div class="searchBox position-relative">
+            <input
+              type="search"
+              onkeyup="searchForProd()"
+              class="form-control"
+              placeholder="ابحث هنا عن منتج...."
+            />
+            <span class="position-absolute">🔎</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="container py-3 overflow-auto">
+      <table class="table table-info">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>التاجر</th>
+            <th>المبلغ المطلوب</th>
+            <th>المبلغ المدفوع</th>
+            <th>المبلغ المتبقي</th>
+            <th>اسم المنتج</th>
+            <th>كمية المنتج</th>
+            <th>سعر قطعة المنتج</th>
+            <th>تعديل</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div onclick="closeAddToInvModal()" class="addToInvModal">
+      <div
+        onclick="event.stopPropagation()"
+        class="prodInfoBox bg-white shadow-lg rounded-3 d-flex flex-column justify-content-center gap-3 p-3"
+      >
+        <span onclick="closeAddToInvModal()" class="closeX">❌</span>
+        <h4 class="text-center">اضف معلومات المنتج</h4>
+        <input
+          id="companyInp"
+          class="form-control"
+          type="text"
+          placeholder="اسم التاجر...."
+        />
+        <input
+          id="totalMoneyInp"
+          class="form-control"
+          type="text"
+          placeholder=" المبلغ الكلي المطلوب...."
+        />
+        <input
+          id="paidMoneyInp"
+          class="form-control"
+          type="text"
+          placeholder=" المبلغ المدفوع...."
+        />
+        <input
+          id="nameInp"
+          class="form-control"
+          type="text"
+          placeholder="اسم المنتج...."
+        />
+        <input
+          id="qtyInp"
+          class="form-control"
+          type="text"
+          placeholder="كمية المنتج...."
+        />
+        <input
+          id="priceInp"
+          class="form-control"
+          type="text"
+          placeholder="سعر المنتج...."
+        />
+        <button onclick="putInInv()" id="putInInvBtn" class="btn btn-success">
+          اضف الى المخزن
+        </button>
+      </div>
+    </div>
+    <div onclick="closeEeditToInvModal()" class="editToInvModal">
+      <div
+        onclick="event.stopPropagation()"
+        class="prodInfoBox bg-white shadow-lg rounded-3 d-flex flex-column justify-content-center gap-2 p-3"
+      >
+        <span onclick="closeEeditToInvModal()" class="closeX">❌</span>
+        <h4 class="text-center">تعديل معلومات المنتج</h4>
+        <label for="companyInpE">اسم التاجر.</label>
+        <input
+          id="companyInpE"
+          class="form-control"
+          type="text"
+          placeholder="اسم التاجر...."
+        />
+        <label for="totalMoneyInpE">المبلغ الكلي المطلوب.</label>
+        <input
+          id="totalMoneyInpE"
+          class="form-control"
+          type="text"
+          placeholder=" المبلغ الكلي المطلوب...."
+        />
+        <label for="paidMoneyInpE">المبلغ المدفوع.</label>
+        <input
+          id="paidMoneyInpE"
+          class="form-control"
+          type="text"
+          placeholder=" المبلغ المدفوع...."
+        />
+        <label for="nameInpE">اسم المنتج.</label>
+        <input
+          id="nameInpE"
+          class="form-control"
+          type="text"
+          placeholder="اسم المنتج...."
+        />
+        <label for="qtyInpE">كمية المنتج.</label>
+        <input
+          id="qtyInpE"
+          class="form-control"
+          type="text"
+          placeholder="كمية المنتج...."
+        />
+        <label for="priceInpE">سعر المنتج.</label>
+        <input
+          id="priceInpE"
+          class="form-control"
+          type="text"
+          placeholder="سعر المنتج...."
+        />
+        <button onclick="editInInv()" class="btn btn-warning">
+          اضف التعديل الى المخزن
+        </button>
+      </div>
+    </div>
+    <div onclick="closeDelModal()" class="delModal">
+      <div
+        onclick="event.stopPropagation()"
+        class="prodInfoBox bg-white shadow-lg rounded-3 d-flex flex-column justify-content-center gap-3 p-3"
+      >
+        <h4 class="text-center">هل انت متأكد من حذف هذا المنتج ؟</h4>
+        <button onclick="delModalFromInv()" class="btn btn-danger">نعم</button>
+        <button onclick="closeDelModal()" class="btn btn-success">لا</button>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
